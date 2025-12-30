@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Settings | NotesApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/static/user/favicon.png" type="image/x-icon">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+
+    <!-- Navbar (UNCHANGED) -->
+    <nav class="bg-white dark:bg-gray-900 shadow-md fixed w-full top-0 left-0 z-50 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+
+            <div class="flex items-center gap-2">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8 6h8M8 10h8M8 14h5M5 4h14v16H5zM9 2v4M15 2v4" />
+                </svg>
+                <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">NotesApp</h1>
+            </div>
+
+            <div class="flex gap-3">
+                <a href="/" class="px-4 py-2 border border-blue-600 text-blue-600 dark:text-blue-400
+                                    rounded-lg hover:bg-blue-600 hover:text-white transition">
+                    Back to Dashboard
+                </a>
+
+                <a href="/userlogout" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="max-w-7xl mx-auto px-6 pt-28 pb-20">
+
+        <!-- Header -->
+        <div class="mb-16">
+            <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
+                Settings & Insights
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-2 max-w-2xl">
+                Monitor your productivity, activity, and personalize how NotesApp works for you.
+            </p>
+        </div>
+
+        <!-- Analytics -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Total Notes</p>
+                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ total_notes }}</p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Active Days</p>
+                <p class="text-3xl font-semibold text-indigo-500 mt-2">24</p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Tasks Completed</p>
+                <p class="text-3xl font-semibold text-green-500 mt-2">76%</p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Storage Used</p>
+                <p class="text-3xl font-semibold text-orange-500 mt-2">1.8 GB</p>
+            </div>
+
+        </div>
+
+        <!-- Productivity -->
+        <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 mb-16">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+                Weekly Productivity
+            </h2>
+
+            <div class="space-y-5">
+
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-gray-600 dark:text-gray-400">Notes Created</span>
+                        <span class="text-gray-500">80%</span>
+                    </div>
+                    <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                        <div class="h-2 bg-blue-600 rounded-full w-4/5"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-gray-600 dark:text-gray-400">Tasks Completed</span>
+                        <span class="text-gray-500">65%</span>
+                    </div>
+                    <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                        <div class="h-2 bg-green-500 rounded-full w-2/3"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Activity & Tasks -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    Recent Activity
+                </h2>
+                <ul class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                    <li>📝 Created “Project Plan”</li>
+                    <li>✏️ Updated “Meeting Notes”</li>
+                    <li>📂 Organized folders</li>
+                    <li>☁️ Cloud sync completed</li>
+                </ul>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    Task Manager
+                </h2>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-700 dark:text-gray-300">Finish UI review</span>
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded">Pending</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-700 dark:text-gray-300">Submit weekly report</span>
+                        <span class="px-2 py-1 bg-green-100 text-green-700 rounded">Done</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Preferences -->
+        <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 space-y-6">
+
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+                App Preferences
+            </h2>
+
+            <!-- Dark Mode Toggle -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="font-medium text-gray-900 dark:text-white">Dark Mode</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Apply theme across the entire app
+                    </p>
+                </div>
+
+                <button id="darkToggle"
+                    class="relative w-11 h-6 rounded-full bg-gray-300 dark:bg-blue-600 transition focus:outline-none">
+                    <span
+                        class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 dark:translate-x-5"></span>
+                </button>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="font-medium text-gray-900 dark:text-white">Auto Save Notes</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Save notes automatically while typing
+                    </p>
+                </div>
+                <span class="text-green-600 font-medium">Enabled</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
+        © 2025 NotesApp. All rights reserved.
+    </footer>
+
+    <script>
+        const toggle = document.getElementById("darkToggle");
+        const html = document.documentElement;
+
+        if (localStorage.getItem("theme") === "dark") {
+            html.classList.add("dark");
+        }
+
+        toggle.addEventListener("click", () => {
+            html.classList.toggle("dark");
+            localStorage.setItem(
+                "theme",
+                html.classList.contains("dark") ? "dark" : "light"
+            );
+        });
+    </script>
+
+</body>
+
+</html>

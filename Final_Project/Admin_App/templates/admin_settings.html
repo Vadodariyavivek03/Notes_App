@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <link rel="shortcut icon" href="/static/admin/admin_favicon.svg" type="image/x-icon">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar -->
+        <aside class="w-72 bg-gradient-to-b from-blue-600 to-indigo-700 
+           dark:from-indigo-900 dark:to-blue-950
+           text-white shadow-xl flex flex-col sticky top-0 h-screen">
+
+            <div class="p-6 flex items-center space-x-3">
+                <div
+                    class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+                    <span class="text-indigo-700 font-bold text-xl">A</span>
+                </div>
+                <h2 class="text-2xl font-bold tracking-wide text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)]">
+                    Admin Panel
+                </h2>
+            </div>
+
+            <nav class="p-6 space-y-3 font-medium">
+                <a href="/adminapp/admin_dashboard" class="block px-4 py-3 rounded-lg hover:bg-white/20">Dashboard</a>
+                <a href="/adminapp/admin_userdata" class="block px-4 py-3 rounded-lg hover:bg-white/20">Users</a>
+                <a href="/adminapp/admin_notesdata" class="block px-4 py-3 rounded-lg hover:bg-white/20">Notes</a>
+                <a href="/adminapp/admin_inquiry" class="block px-4 py-3 rounded-lg hover:bg-white/20">Inquiry</a>
+                <a href="/adminapp/admin_settings" class="block px-4 py-3 rounded-lg bg-white/20">Settings</a>
+            </nav>
+
+            <div class="p-6 mt-auto">
+                <a href="/adminapp/admin_logout"
+                    class="block w-full px-4 py-3 rounded-full bg-red-600 text-center text-white font-semibold hover:bg-red-500 transition">
+                    Log-out
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Scrollable -->
+        <main class="flex-1 overflow-y-auto">
+
+            <header class="p-6 bg-white dark:bg-gray-800 shadow flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-indigo-700 dark:text-indigo-300">
+                    Settings
+                </h1>
+
+                <div id="dateTime" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg shadow-md text-center text-sm font-semibold 
+                    text-gray-800 dark:text-gray-100">
+                </div>
+
+
+                <!-- Dark mode toggle -->
+                <label class="flex items-center cursor-pointer">
+                    <div class="relative">
+                        <input type="checkbox" id="darkToggle" class="sr-only">
+                        <div class="block w-14 h-8 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                        <div id="toggleBall" class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition">
+                        </div>
+                    </div>
+                    <span class="ml-3 text-gray-700 dark:text-gray-200 text-sm">Dark Mode</span>
+                </label>
+
+            </header>
+
+            <section class="p-6 space-y-6">
+
+                <!-- configuration card -->
+                <div onclick="openConfigModal()"
+                    class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 cursor-pointer hover:shadow-2xl transition">
+                    <h2 class="text-xl font-semibold">Application Configuration</h2>
+                    <p class="mt-2 text-gray-600 dark:text-gray-300 text-sm">
+                        Manage appearance preferences and general system UI options.
+                    </p>
+                </div>
+
+                <!-- System Info Card -->
+                <div onclick="openSystemModal()"
+                    class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 cursor-pointer hover:shadow-2xl transition">
+                    <h2 class="text-xl font-semibold">System Information</h2>
+                    <p class="mt-2 text-gray-600 dark:text-gray-300 text-sm">
+                        Displays build details of the NotesApp admin panel.
+                    </p>
+                </div>
+
+                <!-- Graph Card -->
+                <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6">
+                    <h2 class="text-xl font-semibold mb-4">User Activity Overview</h2>
+                    <canvas id="activityChart" height="120"></canvas>
+                </div>
+
+            </section>
+
+            <!-- Config Modal Overlay -->
+            <div id="configModal"
+                class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+
+                <div
+                    class="bg-white dark:bg-gray-900 w-[600px] max-w-full p-6 rounded-2xl shadow-2xl border border-gray-300 dark:border-gray-700 transition">
+
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-indigo-700 dark:text-indigo-400">
+                            Application Configuration
+                        </h3>
+                        <!-- <button onclick="closeConfigModal()" class="text-xl font-bold hover:text-red-500">×</button> -->
+                    </div>
+
+                    <p class="mt-3 text-gray-700 dark:text-gray-300">
+                        Here you can control UI preferences, performance tuning, mail notification settings and user
+                        interface adjustments.
+                    </p>
+
+                    <div class="mt-6 space-y-4 text-sm">
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-800">
+                            <strong>Theme Control:</strong> Switch between light and dark mode.
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-800">
+                            <strong>Mail Alerts:</strong> Enable notifications for incoming mail and approvals.
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-800">
+                            <strong>Performance Settings:</strong> Improve UI animation speed.
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-end">
+                        <button onclick="closeConfigModal()"
+                            class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-semibold">
+                            Close
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- System Info Modal -->
+            <div id="systemModal"
+                class="hidden fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50 transition">
+
+                <div class="bg-white dark:bg-gray-800 w-[600px] max-w-full p-6 rounded-2xl shadow-2xl border
+      border-gray-200 dark:border-gray-700 transform scale-95 transition-all duration-200">
+
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-indigo-700 dark:text-indigo-300">
+                            System Information
+                        </h3>
+                    </div>
+
+                    <div class="mt-4 space-y-3 text-sm">
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <strong>Application:</strong> NotesApp Admin Panel
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <strong>Build Version:</strong> 1.0.4 Stable Release
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <strong>Django Framework:</strong> 4.2 LTS
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <strong>Database:</strong> MySQL
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <strong>Backend Server:</strong> Gunicorn / Localhost
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-end">
+                        <button onclick="closeSystemModal()"
+                            class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-semibold">
+                            Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const html = document.documentElement;
+        const toggle = document.getElementById("darkToggle");
+        const toggleBall = document.getElementById("toggleBall");
+
+        if (localStorage.getItem("theme") === "dark") {
+            html.classList.add("dark");
+            toggle.checked = true;
+            toggleBall.classList.add("translate-x-6");
+        }
+
+        toggle.addEventListener("change", () => {
+            html.classList.toggle("dark");
+            toggleBall.classList.toggle("translate-x-6");
+
+            if (html.classList.contains("dark")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+
+            activityChart.update();
+        });
+
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        const activityChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Active Users',
+                    data: [12, 19, 7, 10, 22, 15, 18],
+                    borderWidth: 2,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: () => html.classList.contains('dark') ? '#fff' : '#000'
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: () => html.classList.contains('dark') ? '#ddd' : '#333' } },
+                    y: { ticks: { color: () => html.classList.contains('dark') ? '#ddd' : '#333' } }
+                }
+            }
+        });
+
+        // App Config Functions
+
+        function openConfigModal() {
+            document.getElementById("configModal").classList.remove("hidden");
+        }
+
+        function closeConfigModal() {
+            document.getElementById("configModal").classList.add("hidden");
+        }
+
+        // System Modal Functions
+
+        function openSystemModal() {
+            document.getElementById("systemModal").classList.remove("hidden");
+        }
+
+        function closeSystemModal() {
+            document.getElementById("systemModal").classList.add("hidden");
+        }
+
+        // Date and Time Display
+
+        function updateDateTime() {
+            const now = new Date();
+            const formatted = now.toLocaleString("en-IN", {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            });
+            document.getElementById("dateTime").textContent = formatted;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+    </script>
+
+</body>
+
+</html>

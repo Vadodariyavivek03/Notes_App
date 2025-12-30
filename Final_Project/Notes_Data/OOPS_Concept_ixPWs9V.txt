@@ -1,0 +1,50 @@
+OOP
+=====================
+
+1) Class -- class is collection of data member / membar function.
+
+2) Object
+
+3) Inheritance
+	-Single
+	-Multiple
+	-Multilevel
+
+4) Encapsulation / data binding
+
+5) Polymorphism 
+	-Method Overloading
+	-Method Riding
+
+6) Access Specifier / Modifier / data hiding
+	- public (default)
+	- private
+
+
+Set-Up For Django
+=================
+
+1) python --version
+
+2) pip install django  ---> it will be download latest.
+
+   pip install django==4.2  ---> when required particular or stable version.
+
+3) django-admin --version   ---> For Check Version
+
+
+Set-Up For Django Virtual Environment
+=====================================
+
+1) pip install virtualenv
+
+2) virtualenv myenv
+
+3) myenv\Scripts\activate
+
+4) pip install django
+
+
+Note : Here globally django version is 4.2 and we can use multiple django version through myenv(virtual environment) in 5.2.7(latest).
+
+ 

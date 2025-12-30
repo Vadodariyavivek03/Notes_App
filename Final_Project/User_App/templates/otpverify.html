@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification</title>
+
+    <link rel="shortcut icon" href="/static/user/favicon.png" type="image/x-icon">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Login Card -->
+    <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+
+        <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">OTP Verification</h2>
+
+        <!-- Success / Error Messages -->
+        {% if messages %}
+        {% for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div class="flex justify-center mb-6">
+            <div class="bg-red-100 text-red-800 px-5 py-2
+                                   rounded-lg text-sm font-medium shadow">
+                {{ msg }}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- OTP -->
+            <div class="mb-5">
+                <label class="block text-gray-700 font-medium mb-1">OTP</label>
+                <input type="number" name="otp"
+                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                    placeholder="Enter your OTP" required>
+            </div>
+
+            <!-- Otp verification Button -->
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg text-lg font-semibold hover:bg-blue-700 transition">
+                Verify OTP
+            </button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
