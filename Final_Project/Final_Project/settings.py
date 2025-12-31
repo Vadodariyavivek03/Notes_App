@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jlq28xjpe3$ghb9b6fv2g3#(+91i2#bn(050vz*)@^yfey65f*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["MyNotesApp.pythonanywhere.com"]
+ALLOWED_HOSTS = ["mynotesapp.pythonanywhere.com"]
 
 # Application definition
 
